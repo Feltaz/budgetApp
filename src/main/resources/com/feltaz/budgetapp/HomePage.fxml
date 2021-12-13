@@ -25,7 +25,7 @@
       <AnchorPane prefHeight="636.0" prefWidth="157.0" style="-fx-background-color: #7ed957;" />
         <AnchorPane fx:id="tableAnchor" layoutY="154.0" minHeight="0.0" minWidth="0.0" opacity="1.0" prefHeight="481.0" prefWidth="836.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="154.0">
             <children>
-                <TableView fx:id="table" layoutX="-157.0" prefHeight="481.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-157.0" AnchorPane.rightAnchor="0.0">
+                <TableView fx:id="tableView" layoutX="-157.0" prefHeight="481.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-157.0" AnchorPane.rightAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="accountCol" maxWidth="5000.0" minWidth="10.0" prefWidth="133.0" text="Account">
                             <cellValueFactory>
@@ -65,8 +65,6 @@
         </AnchorPane>
         <HBox id="HBox" fx:id="entryHolder" alignment="CENTER" prefHeight="25.0" prefWidth="778.0" spacing="5.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="24.0">
             <children>
-                <TextField id="amt" fx:id="desc" disable="true" editable="true" prefWidth="23.0" promptText="Description" text="" visible="false" />
-                <TextField id="amt" fx:id="accountTextField" prefWidth="118.0001220703125" promptText="Account" />
                 <TextField fx:id="amountTextField" prefWidth="118.0" promptText="Amount" />
             <Region prefHeight="200.0" prefWidth="200.0" />
                 <ChoiceBox fx:id="categoryChoice" prefWidth="141.0" style="-fx-background-color: #7ed957;">
@@ -80,7 +78,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <Button fx:id="addEntryButton" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-color: #7ed957;" text="Add Entry" textFill="WHITE" />
+                <Button fx:id="addEntryButton" mnemonicParsing="false" onAction="#addEntryButtonOnAction" prefHeight="25.0" style="-fx-background-color: #7ed957;" text="Add Entry" textFill="WHITE" />
             </children>
         </HBox>
         <Label fx:id="entryAddedLabel" layoutX="247.0" layoutY="707.0" prefHeight="19.0" prefWidth="215.0" text="Entry added successfully" textFill="WHITE" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="524.0">
