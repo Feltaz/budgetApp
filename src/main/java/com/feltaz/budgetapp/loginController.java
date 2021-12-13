@@ -47,7 +47,7 @@ public class loginController implements Initializable {
         lockImageView.setImage(lockImage);
     }
     @FXML
-    public void loginButtonOnAction(ActionEvent event) throws NoSuchAlgorithmException{
+    public void loginButtonOnAction(ActionEvent event) throws NoSuchAlgorithmException {
 
         if(usernameTextField.getText().isBlank()== false && enterPasswordField.getText().isBlank()==false){
             validateLogin();
