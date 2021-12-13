@@ -83,7 +83,7 @@
             <Font size="15.0" />
          </font></Label>
         <Label fx:id="balanceLabel" contentDisplay="LEFT" prefWidth="72.0" text="Balance:" textFill="WHITE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="16.0" />
-        <Hyperlink id="greenLink" fx:id="refreshLink" layoutX="27.0" layoutY="674.0" text="Click to refresh" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="27.0">
+        <Hyperlink id="greenLink" fx:id="refreshLink" layoutX="27.0" layoutY="674.0" onAction="#refreshLinkOnAction" text="Click to refresh" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="27.0">
             <tooltip>
                 <Tooltip text="CLick to refresh balance" />
             </tooltip>

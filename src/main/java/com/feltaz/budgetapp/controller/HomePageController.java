@@ -145,14 +145,30 @@ public class HomePageController implements Initializable {
     }
 
     public void refreshLinkOnAction(ActionEvent event){
+        tableView.getItems().clear();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        String recordViewQuery = "SELECT idRecord,category,account,amount FROM Record WHERE idUser=' "+userId+"'";
         try{
-            DatabaseConnection connectNow = new DatabaseConnection();
-            Connection connectDB = connectNow.getConnection();
             Statement statement = connectDB.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Record WHERE idUser="+connectedUser.getId());
-            while(rs.next()){
-                Record record=new Record(rs.getInt("idRecord"),rs.getString("account"),rs.getDouble("amount"),rs.getString("category"));
+            ResultSet queryResult = statement.executeQuery(recordViewQuery);
+            while(queryResult.next()){
+                Integer queryRecordId=queryResult.getInt("idRecord");
+                String queryRecordAccount=queryResult.getString("account");
+                double queryRecordAmount=queryResult.getDouble("amount");
+                String queryRecordCategory=queryResult.getString("category");
+                recordObservableList.add(new Record(queryRecordId,queryRecordAccount,queryRecordAmount,queryRecordCategory));
+                //We are populating the observable list from the query result
             }
+            //PropertyValueFactory corresponds to the new ProductSearchModel fields
+            //The table column are anotated above @FXML
+            refIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            accountCol.setCellValueFactory(new PropertyValueFactory<>("account"));
+            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+            tableView.setItems(recordObservableList);
+
         }catch(Exception e) {
 
             e.printStackTrace();
