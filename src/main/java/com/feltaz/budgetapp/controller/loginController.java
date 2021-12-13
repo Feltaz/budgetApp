@@ -1,5 +1,6 @@
 package com.feltaz.budgetapp.controller;
 
+import java.io.IOException;
 import java.sql.Statement;
 
 import com.feltaz.budgetapp.DatabaseConnection;
@@ -53,10 +54,16 @@ public class loginController implements Initializable {
         lockImageView.setImage(lockImage);
     }
     @FXML
-    public void loginButtonOnAction(ActionEvent event) throws NoSuchAlgorithmException {
+    public void loginButtonOnAction(ActionEvent event) throws NoSuchAlgorithmException, IOException {
 
         if(usernameTextField.getText().isBlank()== false && enterPasswordField.getText().isBlank()==false){
             validateLogin();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomePage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 986, 732);
+            Stage registerStage =new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(scene);
+            registerStage.show();
         } else {
             loginMessageLabel.setText("Please enter username and password");
         }
