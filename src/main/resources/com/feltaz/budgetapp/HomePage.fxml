@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="parentAnchor" minHeight="694.0" opacity="1.0" prefHeight="732.0" prefWidth="986.0" style="-fx-background-color: #ff914d;" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.feltaz.budgetapp.controller.HomePageController">
+    <children>
+      <AnchorPane prefHeight="636.0" prefWidth="157.0" style="-fx-background-color: #7ed957;" />
+        <AnchorPane fx:id="tableAnchor" layoutY="154.0" minHeight="0.0" minWidth="0.0" opacity="1.0" prefHeight="481.0" prefWidth="836.0" AnchorPane.bottomAnchor="97.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="154.0">
+            <children>
+                <TableView fx:id="table" layoutX="-157.0" prefHeight="481.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-157.0" AnchorPane.rightAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="accountCol" maxWidth="5000.0" minWidth="10.0" prefWidth="133.0" text="Account">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="desc" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn id="amount" fx:id="amountCol" editable="true" maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Amount">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="amount" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="categoryCol" maxWidth="5000.0" minWidth="10.0" prefWidth="154.0" text="Transaction Type">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="typee" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="dateCol" maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Date">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="date" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="refIdCol" maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref ID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="refId" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                    <contextMenu>
+                        <ContextMenu>
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
+                </TableView>
+            </children>
+        </AnchorPane>
+        <HBox id="HBox" fx:id="entryHolder" alignment="CENTER" prefHeight="25.0" prefWidth="778.0" spacing="5.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="24.0">
+            <children>
+                <TextField id="amt" fx:id="desc" disable="true" editable="true" prefWidth="23.0" promptText="Description" text="" visible="false" />
+                <TextField id="amt" fx:id="accountTextField" prefWidth="118.0001220703125" promptText="Account" />
+                <TextField fx:id="amountTextField" prefWidth="118.0" promptText="Amount" />
+            <Region prefHeight="200.0" prefWidth="200.0" />
+                <ChoiceBox fx:id="categoryChoice" prefWidth="141.0" style="-fx-background-color: #7ed957;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Food and Drinks" />
+                            <String fx:value="Transportation" />
+                            <String fx:value="Entertainment" />
+                            <String fx:value="Income" />
+                            <String fx:value="Financial expenses" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Button fx:id="addEntryButton" mnemonicParsing="false" prefHeight="25.0" style="-fx-background-color: #7ed957;" text="Add Entry" textFill="WHITE" />
+            </children>
+        </HBox>
+        <Label fx:id="entryAddedLabel" layoutX="247.0" layoutY="707.0" prefHeight="19.0" prefWidth="215.0" text="Entry added successfully" textFill="WHITE" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="524.0">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="balanceLabel" contentDisplay="LEFT" prefWidth="72.0" text="Balance:" textFill="WHITE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="16.0" />
+        <Hyperlink id="greenLink" fx:id="refreshLink" layoutX="27.0" layoutY="674.0" text="Click to refresh" textFill="WHITE" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="27.0">
+            <tooltip>
+                <Tooltip text="CLick to refresh balance" />
+            </tooltip>
+        </Hyperlink>
+      <AnchorPane prefHeight="155.0" prefWidth="986.0" style="-fx-background-color: #7ed957;">
+         <children>
+            <Label layoutX="302.0" layoutY="75.0" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="userLabel" layoutX="444.0" layoutY="75.0" text="User" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="cornerImageView" fitHeight="187.0" fitWidth="108.0" layoutX="38.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../assets/img/leftAnchor.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logoutButton" layoutX="910.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" style="-fx-background-color: #d71010;" text="Logout" textFill="WHITE" />
+         </children></AnchorPane>
+      <Label fx:id="amountLabel" layoutX="116.0" layoutY="646.0" text="00" textFill="#750808" />
+    </children>
+</AnchorPane>

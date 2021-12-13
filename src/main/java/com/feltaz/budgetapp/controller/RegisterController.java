@@ -1,11 +1,14 @@
 package com.feltaz.budgetapp.controller;
 import com.feltaz.budgetapp.DatabaseConnection;
+import com.feltaz.budgetapp.HelloApplication;
 import com.feltaz.budgetapp.model.User;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.File;
@@ -88,7 +92,14 @@ public class RegisterController implements Initializable {
             }else {
             Statement statement=connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
-            registrationMessageLabel.setText("User Registered Successfully");}
+            registrationMessageLabel.setText("User Registered Successfully");
+               FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomePage.fxml"));
+               Scene scene = new Scene(fxmlLoader.load(), 986, 732);
+               Stage registerStage =new Stage();
+               registerStage.initStyle(StageStyle.UNDECORATED);
+               registerStage.setScene(scene);
+               registerStage.show();
+           }
         } catch(Exception e){
             e.printStackTrace();
             e.getCause();
