@@ -93,12 +93,14 @@ public class RegisterController implements Initializable {
             Statement statement=connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
             registrationMessageLabel.setText("User Registered Successfully");
-               FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomePage.fxml"));
-               Scene scene = new Scene(fxmlLoader.load(), 986, 732);
+               FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+               Scene scene = new Scene(fxmlLoader.load(), 520, 400);
                Stage registerStage =new Stage();
                registerStage.initStyle(StageStyle.UNDECORATED);
                registerStage.setScene(scene);
                registerStage.show();
+               Stage stage = (Stage) closeButton.getScene().getWindow();
+               stage.close();
            }
         } catch(Exception e){
             e.printStackTrace();
