@@ -11,16 +11,20 @@ import java.sql.Statement;
 
 import com.feltaz.budgetapp.DatabaseConnection;
 import com.feltaz.budgetapp.HelloApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.sql.Connection;
@@ -44,10 +48,23 @@ public class HomePageController implements Initializable {
     private ChoiceBox categoryChoice;
     @FXML
     private Label entryAddedLabel;
-
+    @FXML
+    private TableView<Record> tableView;
+    @FXML
+    private TableColumn<Record, Integer > refIdCol;
+    @FXML
+    private TableColumn<Record,String> accountCol;
+    @FXML
+    private TableColumn<Record, Double>  amountCol;
+    @FXML
+    private TableColumn<Record,String> categoryCol;
+    @FXML
+    private TextField accountTextField;
+    @FXML
+    private TextField rfidTextField;
+    ObservableList<Record> recordObservableList= FXCollections.observableArrayList();
 
     private User connectedUser=new User();
-    private Record record = new Record();
     private int userId;
 
 
@@ -58,6 +75,32 @@ public class HomePageController implements Initializable {
         cornerImageView.setImage(cornerImage);
         userLabel.setText("test");
         landOnHome();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        String recordViewQuery = "SELECT idRecord,category,account,amount FROM Record WHERE idUser=' "+userId+"'";
+        try  {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(recordViewQuery);
+            while(queryResult.next()){
+                Integer queryRecordId=queryResult.getInt("idRecord");
+                String queryRecordAccount=queryResult.getString("account");
+                double queryRecordAmount=queryResult.getDouble("amount");
+                String queryRecordCategory=queryResult.getString("category");
+                recordObservableList.add(new Record(queryRecordId,queryRecordAccount,queryRecordAmount,queryRecordCategory));
+                //We are populating the observable list from the query result
+            }
+            //PropertyValueFactory corresponds to the new ProductSearchModel fields
+            //The table column are anotated above @FXML
+            refIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            accountCol.setCellValueFactory(new PropertyValueFactory<>("account"));
+            amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+            tableView.setItems(recordObservableList);
+        } catch(Exception e){
+    e.printStackTrace();
+    e.getCause();
+        }
     }
 
     public void landOnHome(){
@@ -82,13 +125,11 @@ public class HomePageController implements Initializable {
     }
 
     public void addEntryButtonOnAction(){
-        Record newRecord= new Record();
-        newRecord.setAmount(Double.parseDouble(amountTextField.getText()));
-        newRecord.setCategory((String) categoryChoice.getValue());
+        Record newRecord= new Record(2,accountTextField.getText(),Double.parseDouble(amountTextField.getText()),(String) categoryChoice.getValue());
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String addRecord="INSERT INTO Record(Amount,Category,idUser) VALUES(' ";
-        String valuesRecord= String.valueOf(newRecord.getAmount())+"','"+newRecord.getCategory()+"','"+userId+"')";
+        String addRecord="INSERT INTO Record(idRecord,account,amount,category,idUser) VALUES('";
+        String valuesRecord=rfidTextField.getText()+"','"+ newRecord.getAccount()+"','"+String.valueOf(newRecord.getAmount())+"','"+newRecord.getCategory()+"','"+userId+"')";
         try  {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(addRecord+valuesRecord);
@@ -110,11 +151,7 @@ public class HomePageController implements Initializable {
             Statement statement = connectDB.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Record WHERE idUser="+connectedUser.getId());
             while(rs.next()){
-                record.setId(rs.getInt("idRecord"));
-                record.setAmount(rs.getDouble("amount"));
-                record.setCategory((rs.getString("category")));
-                record.setCurrency(Currencies.valueOf(rs.getString("currency")));
-
+                Record record=new Record(rs.getInt("idRecord"),rs.getString("account"),rs.getDouble("amount"),rs.getString("category"));
             }
         }catch(Exception e) {
 
