@@ -42,6 +42,8 @@ public class HomePageController implements Initializable {
     private TextField amountTextField;
     @FXML
     private ChoiceBox categoryChoice;
+    @FXML
+    private Label entryAddedLabel;
 
 
     private User connectedUser=new User();
@@ -69,7 +71,9 @@ public class HomePageController implements Initializable {
             userId=rs.getInt("idUser");
 
         }
-        userLabel.setText(username);}
+        userLabel.setText(username);
+        entryAddedLabel.setText("");
+        }
         catch (Exception e){
             e.printStackTrace();
             e.getCause();
@@ -88,6 +92,7 @@ public class HomePageController implements Initializable {
         try  {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(addRecord+valuesRecord);
+            entryAddedLabel.setText("Entry added successfully");
 
         } catch(Exception e){
             e.printStackTrace();
