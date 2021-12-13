@@ -11,6 +11,13 @@ public class User {
     String username;
     String hashedPassword;
 
+    public User(){
+        id=0;
+        name="N/A";
+        lastName="N/A";
+        username="N/A";
+        hashedPassword="N/A";
+    }
     public int getId() {
         return id;
     }

@@ -5,8 +5,8 @@ import java.time.LocalTime;
 
 public class Record {
     int id;
-    Categories category;
-    Account account;
+    String category;
+    Account account = new Account();
     double amount;
     LocalDate date;
     LocalTime time;
@@ -40,9 +40,9 @@ public class Record {
         this.account = account;
     }
 
-    public void setCategory(Categories category) {
-        this.category = category;
-    }
+    //public void setCategory(Categories category) {
+      //  this.category = category;
+    //}
 
     public Currencies getCurrency() {
         return currency;
@@ -64,7 +64,11 @@ public class Record {
         return account;
     }
 
-    public Categories getCategory() {
+    public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String value) {
+        this.category=value;
     }
 }

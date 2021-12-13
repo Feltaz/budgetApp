@@ -41,6 +41,8 @@ public class loginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private PasswordField enterPasswordField;
+    @FXML
+    private Button loginButton;
 
 
     @Override
@@ -64,6 +66,8 @@ public class loginController implements Initializable {
             registerStage.initStyle(StageStyle.UNDECORATED);
             registerStage.setScene(scene);
             registerStage.show();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
         } else {
             loginMessageLabel.setText("Please enter username and password");
         }
@@ -95,6 +99,9 @@ public class loginController implements Initializable {
             while(queryResult.next()){
                 if(queryResult.getInt(1)==1){
                     loginMessageLabel.setText("Congrats!");
+                    String connectedUP="UPDATE User SET connected=1 WHERE username='"+usernameTextField.getText()+"'";
+                    Statement st = connectDB.createStatement();
+                    st.executeUpdate(connectedUP);
 
                 }else{
                     loginMessageLabel.setText("Invalid Login, Please Try Again");
