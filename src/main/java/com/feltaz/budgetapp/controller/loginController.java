@@ -60,14 +60,7 @@ public class loginController implements Initializable {
 
         if(usernameTextField.getText().isBlank()== false && enterPasswordField.getText().isBlank()==false){
             validateLogin();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomePage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 986, 732);
-            Stage registerStage =new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(scene);
-            registerStage.show();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.close();
+
         } else {
             loginMessageLabel.setText("Please enter username and password");
         }
@@ -102,6 +95,14 @@ public class loginController implements Initializable {
                     String connectedUP="UPDATE User SET connected=1 WHERE username='"+usernameTextField.getText()+"'";
                     Statement st = connectDB.createStatement();
                     st.executeUpdate(connectedUP);
+                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomePage.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 986, 732);
+                    Stage registerStage =new Stage();
+                    registerStage.initStyle(StageStyle.UNDECORATED);
+                    registerStage.setScene(scene);
+                    registerStage.show();
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    stage.close();
 
                 }else{
                     loginMessageLabel.setText("Invalid Login, Please Try Again");
