@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.feltaz.budgetapp.loginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.feltaz.budgetapp.controller.loginController">
     <left>
         <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
             <children>
@@ -35,7 +35,7 @@
                 <PasswordField fx:id="enterPasswordField" layoutX="90.0" layoutY="188.0" prefWidth="180.0" promptText="password" />
                 <Button fx:id="loginButton" layoutX="14.0" layoutY="313.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="264.0" style="-fx-background-color: #7ed957;" text="Login" textFill="WHITE" />
                 <Button fx:id="registerButton" layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="32.0" prefWidth="264.0" style="-fx-background-color: #7ed957;" text="Register" textFill="WHITE" />
-                <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="229.0" prefHeight="16.0" prefWidth="263.0" text="Invalid login, Please try Again" textFill="RED" />
+                <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="229.0" prefHeight="16.0" prefWidth="263.0" textFill="RED" />
             </children>
         </AnchorPane>
     </center>

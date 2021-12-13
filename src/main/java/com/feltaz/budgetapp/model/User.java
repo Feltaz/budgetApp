@@ -1,5 +1,9 @@
 package com.feltaz.budgetapp.model;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class User {
     int id;
     String name;
@@ -45,5 +49,15 @@ public class User {
 
     public String getHashedPassword() {
         return hashedPassword;
+    }
+    public void hashPassword(String str) throws NoSuchAlgorithmException {
+        MessageDigest msg = MessageDigest.getInstance("SHA-256");//call the hasher
+        byte[] hash = msg.digest(str.getBytes(StandardCharsets.UTF_8));
+        // convert bytes to hexadecimal
+        StringBuilder s = new StringBuilder();
+        for (byte b : hash) {
+            s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        }
+        hashedPassword=s.toString();
     }
 }

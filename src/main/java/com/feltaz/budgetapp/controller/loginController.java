@@ -1,8 +1,13 @@
-package com.feltaz.budgetapp;
+package com.feltaz.budgetapp.controller;
 
 import java.sql.Statement;
+
+import com.feltaz.budgetapp.DatabaseConnection;
+import com.feltaz.budgetapp.HelloApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -11,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.sql.Connection;
@@ -59,8 +65,7 @@ public class loginController implements Initializable {
     @FXML
     protected void registerButtonOnAction(ActionEvent event) {
 
-        Stage stage = (Stage) registerButton.getScene().getWindow();
-        stage.close();
+        createAccountForm();
     }
 
     public void validateLogin() throws NoSuchAlgorithmException {
@@ -92,6 +97,18 @@ public class loginController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
             e.getCause();
+
+        }
+    }
+    public void createAccountForm(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 520, 469);
+            Stage registerStage =new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(scene);
+            registerStage.show();
+        } catch(Exception e) {
 
         }
     }

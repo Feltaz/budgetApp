@@ -14,4 +14,6 @@ module com.feltaz.budgetapp {
 
     opens com.feltaz.budgetapp to javafx.fxml;
     exports com.feltaz.budgetapp;
+    exports com.feltaz.budgetapp.controller;
+    opens com.feltaz.budgetapp.controller to javafx.fxml;
 }
